@@ -71,7 +71,7 @@ void show_power_options_menu() {
 	#define POWER_OPTIONS_ITEM_BOOTLOADER	1
 	#define POWER_OPTIONS_ITEM_POWEROFF	2
 
-	static char* list[3];
+	static char* list[4];
 	list[0] = "Reboot Recovery";
 	list[1] = "Reboot Bootloader";
 	list[2] = "Power Off";
