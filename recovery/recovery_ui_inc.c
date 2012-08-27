@@ -59,7 +59,7 @@ int resY=800;		//Value obtained from function 'gr_fb_height()'
 	only the buttons are active instead of the full screen; set to 0
 	for full screen and debugging
  */
-int touchY=600;
+int touchY=0;
 
 /*
  * define a storage limit for backup requirements, we recommend setting
