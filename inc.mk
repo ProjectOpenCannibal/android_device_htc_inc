@@ -103,6 +103,7 @@ $(call inherit-product-if-exists, vendor/htc/inc/inc-vendor.mk)
 $(call inherit-product, device/htc/common/common.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
+#$(call inherit-product, build/target/product/full.mk)
 
 # Incredible uses high-density artwork where available
 PRODUCT_LOCALES += hdpi

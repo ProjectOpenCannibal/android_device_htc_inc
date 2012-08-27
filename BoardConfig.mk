@@ -103,3 +103,7 @@ BOARD_CACHE_FILESYSTEM := auto
 
 # Make sure vold formats the proper sdcard partition
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/htc/inc/recovery/recovery_ui_inc.c
+#BOARD_CUSTOM_RECOVERY_POWER_PROFILE := ../../device/htc/inc/recovery/custom_power.c
+# RECOVERY_BUILD_IN_LANDSCAPE := false
