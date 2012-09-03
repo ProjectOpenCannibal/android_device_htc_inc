@@ -27,8 +27,8 @@
 int TOUCH_CONTROL_DEBUG = 0;
 
 /*
-	to enable on-sccreen log printing set this to 0
-	to disable on-screen log printing set this to 1
+        to enable on-sccreen log printing set this to 0
+        to disable on-screen log printing set this to 1
 */
 int TOUCH_NOSHOW_LOG = 0;
 
@@ -43,7 +43,6 @@ int TOUCH_NOSHOW_LOG = 0;
 	check the values returned by on screen touch output by click on the 
 	touch panel extremeties
 */
-
 int maxX=1008;	// Set to 0 for debugging
 int maxY=952;	// Set to 0 for debugging
 
@@ -62,77 +61,32 @@ int resY=800;		//Value obtained from function 'gr_fb_height()'
 int touchY=0;
 
 /*
- * define a storage limit for backup requirements, we recommend setting
- * this to something appropriate to your device
+	define a storage limit for backup requirements, we recommend setting
+	this to something appropriate to your device
  */
- int minimum_storage=500;
+int minimum_storage=1500;
 
 char* MENU_HEADERS[] = { NULL };
 
 char* MENU_ITEMS[] = { "Boot Android",
-                       "Factory Reset",
-		       "Pre-flash Wipe",
                        "ZIP Flashing",
+                       "Factory Reset",
+                       "Pre-flash Wipe",
                        "Nandroid",
-                       "Partition Management",
+                       "Storage Management",
                        "COT Options",
-		       "Utilities",
                        "Power Options",
                        NULL };
+
+void device_ui_init(UIParameters* ui_parameters) {
+}
 
 int device_recovery_start() {
     return 0;
 }
 
-int device_toggle_display(volatile char* key_pressed, int key_code) {
-    int alt = key_pressed[KEY_LEFTALT] || key_pressed[KEY_RIGHTALT];
-    if (alt && key_code == KEY_L)
-        return 1;
-    // allow toggling of the display if the correct key is pressed, and the display toggle is allowed or the display is currently off
-    if (ui_get_showing_back_button()) {
-        //return 0;
-        return get_allow_toggle_display() && (key_code == KEY_HOME || key_code == KEY_END);
-    }
-    return get_allow_toggle_display() && (key_code == KEY_HOME || key_code == KEY_END);
-}
-
 int device_reboot_now(volatile char* key_pressed, int key_code) {
     return 0;
-}
-
-int device_handle_key(int key_code, int visible) {
-    if (visible) {
-        switch (key_code) {
-        case KEY_CAPSLOCK:
-	    case KEY_DOWN:
-	    case KEY_VOLUMEDOWN:
-		return HIGHLIGHT_DOWN;
-
-	    case KEY_LEFTSHIFT:
-	    case KEY_UP:
-		return HIGHLIGHT_UP;
-
-	    case KEY_LEFTBRACE:
-	    case KEY_ENTER:
-        case BTN_MOUSE:
-        case KEY_CENTER:
-        case KEY_CAMERA:
-        case KEY_MENU:
-        case KEY_F21:
-	    case KEY_VOLUMEUP:
-        case KEY_SEND:
-		return SELECT_ITEM;
-
-	    case KEY_END:
-	    case KEY_POWER:
-        case KEY_BACKSPACE:
-        case KEY_BACK:
-            if (!get_allow_toggle_display())
-		return GO_BACK;
-        }
-    }
-
-    return NO_ACTION;
 }
 
 int device_perform_action(int which) {
@@ -196,7 +150,6 @@ switch (caseN) {
 return 0;
 }
 
-
 //For those devices which has skewed X axis and Y axis detection limit (Not similar to XY resolution of device), So need normalization
 int MT_X(int x)
 {
@@ -213,4 +166,3 @@ int MT_Y(int y)
 
 	return out;
 }
-

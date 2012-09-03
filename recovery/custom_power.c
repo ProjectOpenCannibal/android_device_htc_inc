@@ -24,7 +24,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/reboot.h>
-#include <reboot/reboot.h>
 #include <sys/types.h>
 #include <time.h>
 #include <unistd.h>
@@ -55,7 +54,7 @@
 #include <libgen.h>
 #include "mtdutils/mtdutils.h"
 #include "bmlutils/bmlutils.h"
-
+#include "cutils/android_reboot.h"
 #include "settings.h"
 #include "settingshandler.h"
 #include "settingshandler_lang.h"
@@ -67,9 +66,9 @@ void show_power_options_menu() {
                                 NULL
     };
 
-	#define POWER_OPTIONS_ITEM_REBOOT	0
+	#define POWER_OPTIONS_ITEM_REBOOT		0
 	#define POWER_OPTIONS_ITEM_BOOTLOADER	1
-	#define POWER_OPTIONS_ITEM_POWEROFF	2
+	#define POWER_OPTIONS_ITEM_POWEROFF		2
 
 	static char* list[4];
 	list[0] = "Reboot Recovery";
@@ -82,24 +81,29 @@ void show_power_options_menu() {
 			case GO_BACK:
 				return;
 			case POWER_OPTIONS_ITEM_REBOOT:
-				reboot_wrapper("recovery");
-				break;
-			case POWER_OPTIONS_ITEM_POWEROFF:
-				__system("reboot -p");
+				android_reboot(ANDROID_RB_RESTART2, 0, "recovery");
 				break;
 			case POWER_OPTIONS_ITEM_BOOTLOADER:
-				__system("reboot bootloader");
+				android_reboot(ANDROID_RB_RESTART2, 0, "bootloader");
+				break;
+			case POWER_OPTIONS_ITEM_POWEROFF:
+				pass_shutdown_cmd();
 				break;
 		}
 	}
 }
 
 /* On the off chance that your device requires a non-standard command
- * to reboot from recovery simply replace that command here
+ * to reboot or power off from recovery simply replace that command in
+ * one of the following.
  *
  * It is highly unlikely you will need to change this for your device
  * this was added for the soul purpose of patching reboot in the Amazon
  * Kindle Fire which uses a binary command to reset the idme bootmode. */
 void pass_normal_reboot() {
-	reboot(RB_AUTOBOOT);
+	android_reboot(ANDROID_RB_RESTART, 0, 0);
+}
+
+void pass_shutdown_cmd() {
+	android_reboot(ANDROID_RB_POWEROFF, 0, 0);
 }
