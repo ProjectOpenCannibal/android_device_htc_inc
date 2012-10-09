@@ -85,7 +85,7 @@ char* MENU_HEADERS[] = { NULL };
 
 char* MENU_ITEMS[] = { "Boot Android",
                        "ZIP Flashing",
-					   "Factory Reset",
+		       "Factory Reset",
                        "Pre-flash Wipe",
                        "Nandroid",
                        "Partition Management",
