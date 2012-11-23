@@ -42,10 +42,12 @@ int TOUCH_NOSHOW_LOG = 0;
 	these have to be found by setting them to zero and then in debug mode
 	check the values returned by on screen touch output by click on the 
 	touch panel extremeties
+
+	Initialize as 0, these will be handled by calibration settings from now on.
 */
 
-int maxX=1008;	// Set to 0 for debugging
-int maxY=952;	// Set to 0 for debugging
+int maxX=0;
+int maxY=0;
 
 /*
 	the values of following two variables are dependent on specifc device resolution
@@ -59,11 +61,13 @@ int resY=800;		//Value obtained from function 'gr_fb_height()'
 	only the buttons are active instead of the full screen; set to 0
 	for full screen and debugging
  */
-int touchY=700;
+int touchY=0;
 
 /*
  * define a storage limit for backup requirements, we recommend setting
  * this to something appropriate to your device
+ * 
+ * Initialize as 0, this will be handled by calibration settings from now on.
  */
  int minimum_storage=500;
  
